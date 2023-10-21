@@ -1,0 +1,13 @@
+@layer base, route, component;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: red;
+    margin: 0;
+    padding: 0;
+  }
+}

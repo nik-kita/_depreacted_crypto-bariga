@@ -1,0 +1,7 @@
+@layer route, component;
+
+@layer route {
+  body {
+    background-color: greenyellow;
+  }
+}
