@@ -1,10 +1,15 @@
 @layer islands.HiApi {
-  body {
-    background-color: green;
-  }
-
   .pre {
     background-color: black;
     color: gold;
+  }
+
+  .wrapFlex {
+    block-size: 100vh;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: baseline;
   }
 }
