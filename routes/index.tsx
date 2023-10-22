@@ -7,24 +7,20 @@ type SessionCookies = {
   session: string;
 };
 
-type RedirectCookies = {
-  location: string;
-};
-
 export default defineRoute((req, ctx) => {
   /**
    * is login ? welcome : redirect
    */
-  const cookies = getCookies(req.headers) as Partial<SessionCookies>;
+  const headers = req.headers;
+  const cookies = getCookies(headers) as Partial<SessionCookies>;
 
   if (!cookies.session) {
     return new Response(null, {
       status: 307,
-      headers: new Headers(
-        {
-          location: APP_ROUTES.singIn,
-        } satisfies RedirectCookies,
-      ),
+      headers: new Headers({
+        ...headers,
+        location: APP_ROUTES.singIn,
+      }),
     });
   }
 
