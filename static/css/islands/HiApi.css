@@ -1,0 +1,10 @@
+@layer islands.HiApi {
+  body {
+    background-color: green;
+  }
+
+  .pre {
+    background-color: black;
+    color: gold;
+  }
+}

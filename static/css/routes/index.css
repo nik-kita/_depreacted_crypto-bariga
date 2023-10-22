@@ -1,0 +1,5 @@
+@layer routes {
+  body {
+    background-color: greenyellow;
+  }
+}
