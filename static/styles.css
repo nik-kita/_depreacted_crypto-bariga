@@ -1,4 +1,4 @@
-@layer base, route, component;
+@layer base, routes, islands, components;
 
 @layer base {
   * {

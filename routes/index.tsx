@@ -1,18 +1,12 @@
-import { Head } from "$fresh/runtime.ts";
-import { localCssPath } from "../utils/local-css-path.ts";
+import CssHead from "../components/CssHead.tsx";
+import HiApi from "../islands/HiApi.tsx";
 
 export default function Home() {
-  const css = localCssPath(import.meta.url);
-
-  console.log(css);
-
   return (
     <>
-      <Head>
-        <link rel="stylesheet" href={css} />
-      </Head>
-      <div>
-        hello world
+      <CssHead importMetaUrl={import.meta.url} />
+      <div class="wrapper">
+        <HiApi />
       </div>
     </>
   );
