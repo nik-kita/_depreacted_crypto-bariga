@@ -16,13 +16,14 @@ declare global {
 
 export default function GoogleSignIn(props: Props) {
   const gButton = useRef(null);
+  const gButtonIcon = useRef(null);
 
   useEffect(() => {
     window.gCallback = (...args) => {
       console.warn(...args);
       alert("hi!");
     };
-  }, [gButton.current]);
+  }, []);
 
   return (
     <>
@@ -30,13 +31,13 @@ export default function GoogleSignIn(props: Props) {
       <Head>
         <title>
           {new Intl.DateTimeFormat("en", {
-            dateStyle: "long",
+            dateStyle: "short",
             timeStyle: "long",
           }).format(new Date())}
         </title>
-        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script src="https://accounts.google.com/gsi/client" async></script>
       </Head>
-      <div>
+      <div ref={gButton}>
         <div
           id="g_id_onload"
           data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
