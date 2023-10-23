@@ -8,7 +8,7 @@ type Props = {
 
 const G_HANDLER_NAME = "gCallback" as const;
 declare global {
-  interface Window {
+  interface Document {
     // google: typeof import("npm:google-one-tap");
     [G_HANDLER_NAME]: (...args: unknown[]) => void | Promise<void>;
   }
@@ -42,7 +42,11 @@ export default function GoogleSignIn(props: Props) {
   );
 
   useEffect(() => {
-    window.gCallback = (...args) => {
+    window.document.gCallback = (...args) => {
+      interface Test {
+        hello: string;
+      }
+
       console.warn(...args);
       alert("hi!");
     };
@@ -56,10 +60,10 @@ export default function GoogleSignIn(props: Props) {
           {new Intl.DateTimeFormat("en", {
             timeStyle: "long",
           }).format(new Date())}
+          <script src="https://accounts.google.com/gsi/client" async></script>
         </title>
       </Head>
       {gButton.current}
-      <script src="https://accounts.google.com/gsi/client" async></script>
     </>
   );
 }
