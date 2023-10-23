@@ -15,31 +15,7 @@ declare global {
 }
 
 export default function GoogleSignIn(props: Props) {
-  const gButton = useRef(
-    <div>
-      <div
-        id="g_id_onload"
-        data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
-        data-context="use"
-        data-ux_mode="popup"
-        data-callback={"gCallback" satisfies typeof G_HANDLER_NAME}
-        data-nonce=""
-        data-auto_prompt="false"
-      >
-      </div>
-
-      <div
-        class="g_id_signin"
-        data-type="standard"
-        data-shape="pill"
-        data-theme="filled_black"
-        data-text="continue_with"
-        data-size="large"
-        data-locale="en-US"
-      >
-      </div>
-    </div>,
-  );
+  const gButton = useRef(null);
 
   return (
     <>
@@ -57,14 +33,36 @@ export default function GoogleSignIn(props: Props) {
          * // TODO find more beauty solution (or use js)
          */
       }
-      <script>
-        {`
+      <div ref={gButton}>
+        <script>
+          {`
         function ${G_HANDLER_NAME}(...args) {
           console.warn(...args);
         }
       `}
-      </script>
-      {gButton.current}
+        </script>
+        <div
+          id="g_id_onload"
+          data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
+          data-context="use"
+          data-ux_mode="popup"
+          data-callback={"gCallback" satisfies typeof G_HANDLER_NAME}
+          data-nonce=""
+          data-auto_prompt="false"
+        >
+        </div>
+
+        <div
+          class="g_id_signin"
+          data-type="standard"
+          data-shape="pill"
+          data-theme="filled_black"
+          data-text="continue_with"
+          data-size="large"
+          data-locale="en-US"
+        >
+        </div>
+      </div>
     </>
   );
 }
