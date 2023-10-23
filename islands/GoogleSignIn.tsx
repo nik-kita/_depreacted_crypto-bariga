@@ -9,17 +9,17 @@ export default function GoogleSignIn(props: Props) {
 
   return (
     <>
-      <div class="parentFlexRowCenter blockSizeFullV">
-        <div
-          id="g_id_onload"
-          data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
-          data-context="signin"
-          data-ux_mode="popup"
-          data-callback={handleCredentialResponse}
-          data-auto_prompt="false"
-        >
-        </div>
+      <div
+        id="g_id_onload"
+        data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
+        data-context="signin"
+        data-ux_mode="popup"
+        data-callback={handleCredentialResponse}
+        data-auto_prompt="false"
+      >
+      </div>
 
+      <div class="parentFlexRowCenter blockSizeFullV">
         <div
           class="g_id_signin"
           data-type="standard"
