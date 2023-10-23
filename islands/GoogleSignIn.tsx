@@ -7,22 +7,19 @@ type Props = {
 };
 
 const G_HANDLER_NAME = "gCallback" as const;
-declare global {
-  interface Window {
-    // google: typeof import("npm:google-one-tap");
-    [G_HANDLER_NAME]: (...args: unknown[]) => void | Promise<void>;
-  }
-}
 
 export default function GoogleSignIn(props: Props) {
   const gButton = useRef(null);
   const gButtonIcon = useRef(null);
 
   useEffect(() => {
-    window.gCallback = (...args) => {
+    function gCallback(...args: unknown[]) {
       console.warn(...args);
       alert("hi!");
-    };
+    }
+
+    console.log(gCallback.toString());
+    (globalThis as unknown as Record<string, () => void>).gCallback = gCallback;
   }, []);
 
   return (
