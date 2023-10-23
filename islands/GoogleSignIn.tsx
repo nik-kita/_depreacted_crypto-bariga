@@ -9,16 +9,27 @@ export default function GoogleSignIn(props: Props) {
 
   return (
     <>
-      <script src="https://accounts.google.com/gsi/client" async defer></script>
-      <div
-        id="g_id_onload"
-        data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
-        data-callback={handleCredentialResponse}
-      >
-      </div>
-      <div class="g_id_signin" data-type="standard"></div>
       <div class="parentFlexRowCenter blockSizeFullV">
-        <div class="g-signin" data-type="standard"></div>
+        <div
+          id="g_id_onload"
+          data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
+          data-context="signin"
+          data-ux_mode="popup"
+          data-callback={handleCredentialResponse}
+          data-auto_prompt="false"
+        >
+        </div>
+
+        <div
+          class="g_id_signin"
+          data-type="standard"
+          data-shape="rectangular"
+          data-theme="outline"
+          data-text="signin_with"
+          data-size="large"
+          data-logo_alignment="left"
+        >
+        </div>
       </div>
     </>
   );
