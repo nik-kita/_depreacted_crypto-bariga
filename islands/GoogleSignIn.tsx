@@ -51,7 +51,7 @@ export default function GoogleSignIn(props: Props) {
         <div
           class="g_id_signin"
           data-type="icon"
-          data-shape="circle"
+          data-shape="pill"
           data-theme="filled_black"
           data-text="continue_with"
           data-size="large"
