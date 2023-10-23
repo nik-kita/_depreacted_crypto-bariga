@@ -1,5 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useRef } from "preact/hooks";
 import CssHead from "../components/CssHead.tsx";
 
 type Props = {
@@ -15,7 +15,6 @@ declare global {
 }
 
 export default function GoogleSignIn(props: Props) {
-  const [isHandlerAppended, setIsHandlerAppended] = useState(false);
   const gButton = useRef(
     <div>
       <div
@@ -42,19 +41,6 @@ export default function GoogleSignIn(props: Props) {
     </div>,
   );
 
-  useEffect(() => {
-    window.gCallback = (...args) => {
-      interface Test {
-        hello: string;
-      }
-
-      console.warn(...args);
-      alert("hi!");
-    };
-
-    setIsHandlerAppended(true);
-  }, []);
-
   return (
     <>
       <CssHead importMetaUrl={import.meta.url} />
@@ -66,7 +52,19 @@ export default function GoogleSignIn(props: Props) {
         </title>
         <script src="https://accounts.google.com/gsi/client" async></script>
       </Head>
-      {isHandlerAppended && gButton.current}
+      {
+        /**
+         * // TODO find more beauty solution (or use js)
+         */
+      }
+      <script>
+        {`
+        function ${G_HANDLER_NAME}(...args) {
+          console.warn(...args);
+        }
+      `}
+      </script>
+      {gButton.current}
     </>
   );
 }
