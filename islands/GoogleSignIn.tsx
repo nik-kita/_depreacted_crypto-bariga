@@ -57,8 +57,8 @@ export default function GoogleSignIn(props: Props) {
             timeStyle: "long",
           }).format(new Date())}
         </title>
-        <script src="https://accounts.google.com/gsi/client" async></script>
       </Head>
+      <script src="https://accounts.google.com/gsi/client" async></script>
       {gButton.current}
     </>
   );
