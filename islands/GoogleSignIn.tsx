@@ -1,5 +1,4 @@
 import { Head } from "$fresh/runtime.ts";
-import { useRef } from "preact/hooks";
 import CssHead from "../components/CssHead.tsx";
 
 type Props = {
@@ -15,8 +14,6 @@ declare global {
 }
 
 export default function GoogleSignIn(props: Props) {
-  const gButton = useRef(null);
-
   return (
     <>
       <CssHead importMetaUrl={import.meta.url} />
@@ -33,7 +30,7 @@ export default function GoogleSignIn(props: Props) {
          * // TODO find more beauty solution (or use js)
          */
       }
-      <div ref={gButton}>
+      <div>
         <script>
           {`
         function ${G_HANDLER_NAME}(...args) {
