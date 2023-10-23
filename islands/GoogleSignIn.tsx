@@ -22,7 +22,7 @@ export default function GoogleSignIn(props: Props) {
       console.warn(...args);
       alert("hi!");
     };
-  }, []);
+  }, [gButton.current]);
 
   return (
     <>
