@@ -1,14 +1,28 @@
 import { Head } from "$fresh/runtime.ts";
-import { useRef } from "preact/hooks";
+import { useEffect, useRef } from "preact/hooks";
 import CssHead from "../components/CssHead.tsx";
 
 type Props = {
   OAUTH_2_CLIENT_ID_WEB_1: string;
 };
 
+const G_HANDLER_NAME = "handleGoogleOneTapAuth" as const;
+
+declare global {
+  interface Window {
+    [G_HANDLER_NAME]: (...args: unknown[]) => void | Promise<void>;
+  }
+}
+
 export default function GoogleSignIn(props: Props) {
   const gButton = useRef(null);
-  const handleGoogleOneTapAuth = console.warn;
+
+  useEffect(() => {
+    window.handleGoogleOneTapAuth = (...args) => {
+      console.warn(...args);
+      alert("hi!");
+    };
+  }, []);
 
   return (
     <>
@@ -23,8 +37,8 @@ export default function GoogleSignIn(props: Props) {
             data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
             data-context="use"
             data-ux_mode="popup"
-            data-callback={handleGoogleOneTapAuth}
-            data-nonce=""
+            data-callback={"handleGoogleOneTapAuth" satisfies typeof G_HANDLER_NAME}
+            data-nonce="ok, google"
             data-auto_select="true"
             data-itp_support="true"
           >
