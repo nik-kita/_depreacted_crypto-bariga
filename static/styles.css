@@ -1,4 +1,6 @@
-@layer base, routes, islands, components;
+@layer base, common, routes, islands, components;
+
+@import 'styles.common.css';
 
 @layer base {
   * {

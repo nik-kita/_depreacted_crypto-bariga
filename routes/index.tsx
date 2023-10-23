@@ -4,7 +4,7 @@ import CssHead from "../components/CssHead.tsx";
 import { APP_ROUTES } from "../src/const.ts";
 
 type SessionCookies = {
-  session: string;
+  auth: string;
 };
 
 export default defineRoute((req, ctx) => {
@@ -14,7 +14,7 @@ export default defineRoute((req, ctx) => {
   const headers = req.headers;
   const cookies = getCookies(headers) as Partial<SessionCookies>;
 
-  if (!cookies.session) {
+  if (!cookies.auth) {
     return new Response(null, {
       status: 307,
       headers: new Headers({
@@ -28,6 +28,7 @@ export default defineRoute((req, ctx) => {
     <>
       <CssHead importMetaUrl={import.meta.url} />
       <h1>Welcome!</h1>
+      <pre>{JSON.stringify(cookies, null, 2)}</pre>
     </>
   );
 });
