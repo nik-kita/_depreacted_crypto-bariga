@@ -42,7 +42,7 @@ export default function GoogleSignIn(props: Props) {
           {new Intl.DateTimeFormat("en", {
             dateStyle: "long",
             timeStyle: "long",
-          }).formatToParts(new Date())}
+          }).format(new Date())}
         </title>
         <script src="https://accounts.google.com/gsi/client" async></script>
       </Head>
