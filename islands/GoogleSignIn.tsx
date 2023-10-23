@@ -30,7 +30,7 @@ export default function GoogleSignIn(props: Props) {
 
       <div
         class="g_id_signin"
-        data-type="icon"
+        data-type="standard"
         data-shape="pill"
         data-theme="filled_black"
         data-text="continue_with"
