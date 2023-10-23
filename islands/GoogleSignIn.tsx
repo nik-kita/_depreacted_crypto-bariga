@@ -1,5 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
-import { useEffect, useRef } from "preact/hooks";
+import { useRef } from "preact/hooks";
 import CssHead from "../components/CssHead.tsx";
 
 type Props = {
@@ -8,9 +8,7 @@ type Props = {
 
 export default function GoogleSignIn(props: Props) {
   const gButton = useRef(null);
-
-  useEffect(() => {
-  }, [gButton.current]);
+  const handleGoogleOneTapAuth = console.warn;
 
   return (
     <>
@@ -25,7 +23,7 @@ export default function GoogleSignIn(props: Props) {
             data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
             data-context="use"
             data-ux_mode="popup"
-            data-callback="handleGoogleOneTapAuth"
+            data-callback={handleGoogleOneTapAuth}
             data-nonce=""
             data-auto_select="true"
             data-itp_support="true"
