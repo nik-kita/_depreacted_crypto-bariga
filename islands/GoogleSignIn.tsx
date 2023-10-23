@@ -42,14 +42,14 @@ export default function GoogleSignIn(props: Props) {
   );
 
   useEffect(() => {
-    window.document.gCallback = (...args) => {
+    Object.defineProperty(window, G_HANDLER_NAME, (...args: unknown[]) => {
       interface Test {
         hello: string;
       }
 
       console.warn(...args);
       alert("hi!");
-    };
+    });
   }, []);
 
   return (
