@@ -2,31 +2,28 @@ type Props = {
   OAUTH_2_CLIENT_ID_WEB_1: string;
 };
 
-declare global {
-  interface Window {
-    handleGoogleSignInRes: (...response: unknown[]) => void;
-  }
+function handleGoogleSignInRes(response: unknown) {
+  console.log(response);
 }
 
 export default function GoogleSignIn(props: Props) {
-  window.handleGoogleSignInRes = (...args: unknown[]) => {
-    console.log(...args);
-  };
-
   return (
     <>
+      <h1>G00</h1>
       <script src="https://accounts.google.com/gsi/client" async></script>
-
       <div
         id="g_id_onload"
         data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
         data-context="signin"
         data-ux_mode="popup"
-        data-callback={"handleGoogleSignInRes" satisfies keyof Window}
+        data-callback={handleGoogleSignInRes.name}
         data-auto_prompt="false"
       >
       </div>
-      <hr />
+      <script>
+        {handleGoogleSignInRes.toString()}
+      </script>
+
       <div class="parentFlexRowCenter blockSizeFullV">
         <div
           class="g_id_signin"
@@ -39,7 +36,6 @@ export default function GoogleSignIn(props: Props) {
         >
         </div>
       </div>
-      <hr />
     </>
   );
 }
