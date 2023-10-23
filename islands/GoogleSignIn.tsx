@@ -1,5 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
-import { useEffect, useRef } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import CssHead from "../components/CssHead.tsx";
 
 type Props = {
@@ -8,13 +8,14 @@ type Props = {
 
 const G_HANDLER_NAME = "gCallback" as const;
 declare global {
-  interface Document {
+  interface Window {
     // google: typeof import("npm:google-one-tap");
     [G_HANDLER_NAME]: (...args: unknown[]) => void | Promise<void>;
   }
 }
 
 export default function GoogleSignIn(props: Props) {
+  const [isHandlerAppended, setIsHandlerAppended] = useState(false);
   const gButton = useRef(
     <div>
       <div
@@ -42,14 +43,16 @@ export default function GoogleSignIn(props: Props) {
   );
 
   useEffect(() => {
-    Object.defineProperty(window, G_HANDLER_NAME, (...args: unknown[]) => {
+    window.gCallback = (...args) => {
       interface Test {
         hello: string;
       }
 
       console.warn(...args);
       alert("hi!");
-    });
+    };
+
+    setIsHandlerAppended(true);
   }, []);
 
   return (
@@ -63,7 +66,7 @@ export default function GoogleSignIn(props: Props) {
           <script src="https://accounts.google.com/gsi/client" async></script>
         </title>
       </Head>
-      {gButton.current}
+      {isHandlerAppended && gButton.current}
     </>
   );
 }
