@@ -8,7 +8,7 @@ function handleGoogleSignInRes(response: unknown) {
 
 export default function GoogleSignIn(props: Props) {
   return (
-    <>
+    <div style={{ zIndex: 1000 }}>
       <h1>1</h1>
       <script src="https://accounts.google.com/gsi/client" async></script>
       <div
@@ -34,6 +34,6 @@ export default function GoogleSignIn(props: Props) {
         data-logo_alignment="left"
       >
       </div>
-    </>
+    </div>
   );
 }
