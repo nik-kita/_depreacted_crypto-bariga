@@ -1,26 +1,20 @@
 import { Head } from "$fresh/runtime.ts";
-import { useEffect, useRef } from "preact/hooks";
+import { useRef } from "preact/hooks";
 import CssHead from "../components/CssHead.tsx";
 
 type Props = {
   OAUTH_2_CLIENT_ID_WEB_1: string;
 };
 
-const G_HANDLER_NAME = "gCallback" as const;
+const G_HANDLER = {
+  gCallback(...args: unknown[]) {
+    console.warn(...args);
+    alert("hi!");
+  },
+} as const;
 
 export default function GoogleSignIn(props: Props) {
   const gButton = useRef(null);
-  const gButtonIcon = useRef(null);
-
-  useEffect(() => {
-    // deno-lint-ignore no-var
-    var gCallback = function (...args: unknown[]) {
-      console.warn(...args);
-      alert("hi!");
-    };
-
-    console.log(gCallback.toString());
-  }, []);
 
   return (
     <>
@@ -35,12 +29,13 @@ export default function GoogleSignIn(props: Props) {
         <script src="https://accounts.google.com/gsi/client" async></script>
       </Head>
       <div ref={gButton}>
+        <script>{G_HANDLER.gCallback.toString()}</script>
         <div
           id="g_id_onload"
           data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
           data-context="use"
           data-ux_mode="popup"
-          data-callback={"gCallback" satisfies typeof G_HANDLER_NAME}
+          data-callback={"gCallback" satisfies keyof typeof G_HANDLER}
           data-nonce=""
           data-auto_prompt="false"
         >
