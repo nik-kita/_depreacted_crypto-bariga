@@ -37,15 +37,6 @@ export default function GoogleSignIn(props: Props) {
         <script src="https://accounts.google.com/gsi/client" async></script>
       </Head>
       <div>
-        <script>
-          {`function gCallback(...args) {
-            if (window.gCallback) window.gCallback(...args);
-
-            console.log('--------------');
-            console.log(...args);
-            console.log('---------------');
-          }`}
-        </script>
         <div
           id="g_id_onload"
           data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
