@@ -63,8 +63,8 @@ export default function GoogleSignIn(props: Props) {
           {new Intl.DateTimeFormat("en", {
             timeStyle: "long",
           }).format(new Date())}
-          <script src="https://accounts.google.com/gsi/client" async></script>
         </title>
+        <script src="https://accounts.google.com/gsi/client" async></script>
       </Head>
       {isHandlerAppended && gButton.current}
     </>
