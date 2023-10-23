@@ -13,13 +13,13 @@ export default function GoogleSignIn(props: Props) {
   const gButtonIcon = useRef(null);
 
   useEffect(() => {
-    function gCallback(...args: unknown[]) {
+    // deno-lint-ignore no-var
+    var gCallback = function (...args: unknown[]) {
       console.warn(...args);
       alert("hi!");
-    }
+    };
 
     console.log(gCallback.toString());
-    (globalThis as unknown as Record<string, () => void>).gCallback = gCallback;
   }, []);
 
   return (
