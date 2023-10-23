@@ -39,7 +39,7 @@ export default function GoogleSignIn(props: Props) {
       <div>
         <script>
           {`function gCallback(...args) {
-            window.gCallback && window.gCallback(...args);
+            if (window.gCallback) window.gCallback(...args);
 
             console.log('--------------');
             console.log(...args);
