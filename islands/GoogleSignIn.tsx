@@ -8,8 +8,12 @@ type Props = {
 
 const G_HANDLER_NAME = "handleGoogleOneTapAuth" as const;
 
+/// <reference types="npm:google-one-tap" />
+/// <reference types="npm:google.accounts" />
+
 declare global {
   interface Window {
+    google: typeof import("npm:google-one-tap");
     [G_HANDLER_NAME]: (...args: unknown[]) => void | Promise<void>;
   }
 }
@@ -22,12 +26,24 @@ export default function GoogleSignIn(props: Props) {
       console.warn(...args);
       alert("hi!");
     };
+
+    window.google.accounts.id.initialize({
+      client_id: props.OAUTH_2_CLIENT_ID_WEB_1,
+      callback: console.info,
+      state_cookie_domain: "https://example.com",
+    });
   }, [gButton.current]);
 
   return (
     <>
       <CssHead importMetaUrl={import.meta.url} />
       <Head>
+        <title>
+          {new Intl.DateTimeFormat("en", {
+            dateStyle: "long",
+            timeStyle: "long",
+          }).formatToParts(new Date())}
+        </title>
         <script src="https://accounts.google.com/gsi/client" async></script>
       </Head>
       <div>
