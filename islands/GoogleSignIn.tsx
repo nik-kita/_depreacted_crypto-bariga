@@ -20,7 +20,7 @@ export default function GoogleSignIn(props: Props) {
         data-auto_prompt="false"
       >
       </div>
-
+      <hr />
       <div class="parentFlexRowCenter blockSizeFullV">
         <div
           class="g_id_signin"
@@ -33,6 +33,7 @@ export default function GoogleSignIn(props: Props) {
         >
         </div>
       </div>
+      <hr />
     </>
   );
 }
