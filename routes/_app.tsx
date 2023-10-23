@@ -1,4 +1,7 @@
 import { AppProps } from "$fresh/server.ts";
+import { loadSync } from "$std/dotenv/mod.ts";
+
+loadSync({ envPath: ".env", export: true });
 
 export default function App({ Component }: AppProps) {
   return (

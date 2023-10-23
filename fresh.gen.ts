@@ -5,16 +5,18 @@
 import * as $0 from "./routes/_404.tsx";
 import * as $1 from "./routes/_app.tsx";
 import * as $2 from "./routes/index.tsx";
-import * as $$0 from "./islands/HiApi.tsx";
+import * as $3 from "./routes/sign-in/index.tsx";
+import * as $$0 from "./islands/GoogleSignIn.tsx";
 
 const manifest = {
   routes: {
     "./routes/_404.tsx": $0,
     "./routes/_app.tsx": $1,
     "./routes/index.tsx": $2,
+    "./routes/sign-in/index.tsx": $3,
   },
   islands: {
-    "./islands/HiApi.tsx": $$0,
+    "./islands/GoogleSignIn.tsx": $$0,
   },
   baseUrl: import.meta.url,
 };
