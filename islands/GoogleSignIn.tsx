@@ -34,7 +34,7 @@ export default function GoogleSignIn(props: Props) {
             timeStyle: "long",
           }).format(new Date())}
         </title>
-        <script src="https://accounts.google.com/gsi/client" async></script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
       </Head>
       <div>
         <div
