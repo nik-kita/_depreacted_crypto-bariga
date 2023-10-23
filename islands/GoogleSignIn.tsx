@@ -58,8 +58,8 @@ export default function GoogleSignIn(props: Props) {
           }).format(new Date())}
         </title>
       </Head>
-      <script src="https://accounts.google.com/gsi/client" async></script>
       {gButton.current}
+      <script src="https://accounts.google.com/gsi/client" async></script>
     </>
   );
 }
