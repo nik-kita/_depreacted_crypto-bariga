@@ -9,6 +9,8 @@ export default function GoogleSignIn(props: Props) {
 
   return (
     <>
+      <script src="https://accounts.google.com/gsi/client" async></script>
+
       <div
         id="g_id_onload"
         data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
