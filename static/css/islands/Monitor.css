@@ -1,0 +1,14 @@
+@layer islands.Monitor {
+  *>.main:first() {
+    background-color: greenyellow;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: baseline;
+  }
+
+  pre {
+    background-color: darkslategrey;
+    color: gold;
+  }
+}

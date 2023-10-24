@@ -1,6 +1,7 @@
 import { defineRoute } from "$fresh/src/server/defines.ts";
 import { getCookies } from "$std/http/cookie.ts";
 import CssHead from "../components/CssHead.tsx";
+import Monitor from "../islands/Monitor.tsx";
 import { APP_ROUTES } from "../src/const.ts";
 
 type SessionCookies = {
@@ -8,9 +9,6 @@ type SessionCookies = {
 };
 
 export default defineRoute((req, ctx) => {
-  /**
-   * is login ? welcome : redirect
-   */
   const headers = req.headers;
   const cookies = getCookies(headers) as Partial<SessionCookies>;
 
@@ -27,8 +25,7 @@ export default defineRoute((req, ctx) => {
   return (
     <>
       <CssHead importMetaUrl={import.meta.url} />
-      <h1>Welcome!</h1>
-      <pre>{JSON.stringify(cookies, null, 2)}</pre>
+      <Monitor />
     </>
   );
 });

@@ -1,5 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
-import { useEffect, useRef } from "preact/hooks";
+import "npm:js-cookie";
+import { useEffect, useRef, useState } from "preact/hooks";
 import CssHead from "../components/CssHead.tsx";
 
 type Props = {
@@ -15,10 +16,11 @@ declare global {
 export default function GoogleSignIn(props: Props) {
   const ID = props.OAUTH_2_CLIENT_ID_WEB_1;
   const gDiv = useRef(null);
+  const [googleRes, setGoogleRes] = useState("");
+  const [successSignIn, setSuccessSignIn] = useState(false);
 
-  function handleCredentialResponse(response: unknown) {
-    console.log("google response: ");
-    console.warn(response);
+  function handleCredentialResponse(response: string) {
+    setGoogleRes(response);
   }
 
   useEffect(() => {
@@ -42,6 +44,31 @@ export default function GoogleSignIn(props: Props) {
     window.google.accounts.id.prompt(); // also display the One Tap dialog
   }, [gDiv.current]);
 
+  useEffect(() => {
+    if (!googleRes) return;
+
+    const apiAction = async () => {
+      const res = await fetch("http://localhost:3000/api/auth", {
+        body: JSON.stringify({
+          googleAuthResponse: googleRes,
+        }),
+      });
+
+      console.log(res);
+
+      setSuccessSignIn(true);
+    };
+
+    apiAction();
+  }, [googleRes]);
+
+  if (successSignIn) {
+    window.document.location.href = "/";
+    window.document.cookie = `${"auth"}=${"mock"}`;
+
+    return;
+  }
+
   return (
     <>
       <CssHead importMetaUrl={import.meta.url} />
@@ -51,12 +78,14 @@ export default function GoogleSignIn(props: Props) {
         </title>
         <script src="https://accounts.google.com/gsi/client" async></script>
       </Head>
-      <div
-        id="gDiv"
-        ref={gDiv}
-        class={"parentFlexRowCenter blockSizeFullV"}
-      >
-      </div>
+      {googleRes || (
+        <div
+          id="gDiv"
+          ref={gDiv}
+          class={"parentFlexRowCenter blockSizeFullV"}
+        >
+        </div>
+      )}
     </>
   );
 }

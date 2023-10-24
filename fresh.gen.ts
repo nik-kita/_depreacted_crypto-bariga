@@ -7,6 +7,7 @@ import * as $1 from "./routes/_app.tsx";
 import * as $2 from "./routes/index.tsx";
 import * as $3 from "./routes/sign-in/index.tsx";
 import * as $$0 from "./islands/GoogleSignIn.tsx";
+import * as $$1 from "./islands/Monitor.tsx";
 
 const manifest = {
   routes: {
@@ -17,6 +18,7 @@ const manifest = {
   },
   islands: {
     "./islands/GoogleSignIn.tsx": $$0,
+    "./islands/Monitor.tsx": $$1,
   },
   baseUrl: import.meta.url,
 };
