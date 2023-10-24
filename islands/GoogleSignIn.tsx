@@ -1,64 +1,61 @@
 import { Head } from "$fresh/runtime.ts";
+import { useEffect, useRef } from "preact/hooks";
 import CssHead from "../components/CssHead.tsx";
 
 type Props = {
   OAUTH_2_CLIENT_ID_WEB_1: string;
 };
 
-const G_HANDLER_NAME = "gCallback" as const;
 declare global {
   interface Window {
-    // google: typeof import("npm:google-one-tap");
-    [G_HANDLER_NAME]: (...args: unknown[]) => void | Promise<void>;
+    google: typeof import("npm:google-one-tap");
   }
 }
 
 export default function GoogleSignIn(props: Props) {
+  const ID = props.OAUTH_2_CLIENT_ID_WEB_1;
+  const gDiv = useRef(null);
+
+  function handleCredentialResponse(response: unknown) {
+    console.log("google response: ");
+    console.warn(response);
+  }
+
+  useEffect(() => {
+    if (!gDiv.current) return;
+
+    window.google.accounts.id.initialize({
+      client_id: ID,
+      callback: handleCredentialResponse,
+    });
+    window.google.accounts.id.renderButton(
+      document.getElementById("gDiv"),
+      {
+        theme: "filled_black",
+        size: "large",
+        text: "signin-with",
+        shape: "pill",
+        context: "use",
+        ux_mode: "popup",
+      }, // customization attributes
+    );
+    window.google.accounts.id.prompt(); // also display the One Tap dialog
+  }, [gDiv.current]);
+
   return (
     <>
       <CssHead importMetaUrl={import.meta.url} />
       <Head>
         <title>
-          {new Intl.DateTimeFormat("en", {
-            timeStyle: "long",
-          }).format(new Date())}
+          Sign IN / UP / OUT
         </title>
         <script src="https://accounts.google.com/gsi/client" async></script>
       </Head>
-      {
-        /**
-         * // TODO find more beauty solution (or use js)
-         */
-      }
-      <div>
-        <script>
-          {`
-        function ${G_HANDLER_NAME}(...args) {
-          console.warn(...args);
-        }
-      `}
-        </script>
-        <div
-          id="g_id_onload"
-          data-client_id={props.OAUTH_2_CLIENT_ID_WEB_1}
-          data-context="use"
-          data-ux_mode="popup"
-          data-callback={"gCallback" satisfies typeof G_HANDLER_NAME}
-          data-nonce=""
-          data-auto_prompt="false"
-        >
-        </div>
-
-        <div
-          class="g_id_signin"
-          data-type="standard"
-          data-shape="pill"
-          data-theme="filled_black"
-          data-text="continue_with"
-          data-size="large"
-          data-locale="en-US"
-        >
-        </div>
+      <div
+        id="gDiv"
+        ref={gDiv}
+        class={"parentFlexRowCenter blockSizeFullV"}
+      >
       </div>
     </>
   );
