@@ -1,0 +1,6 @@
+[submodule "hft.moneytor"]
+	path = hft.moneytor
+	url = https://github.com/nik-kita/hft.moneytor.git
+[submodule "moneytor"]
+	path = moneytor
+	url = https://github.com/nik-kita/moneytor.git
